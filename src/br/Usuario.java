@@ -28,7 +28,7 @@ public abstract class Usuario {
     this.id = id;
   }
 
-  //METODOS PUBLICOS APLICAÇÂO DE ABSTRACAO
+  //METODOS PUBLICOS APLICAÇÂO DE ABSTRACAO, DEFINIÇÃO DO CONTRATO
   public abstract double calcularMulta(int diasAtraso);
   public abstract int getDiasEmprestimo();
 
