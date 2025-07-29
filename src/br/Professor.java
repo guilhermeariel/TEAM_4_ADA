@@ -19,7 +19,6 @@ public class Professor extends Usuario{
     this.departamento = departamento;
   }
 
-
   @Override
   public double calcularMulta(int diasAtraso) {
     return diasAtraso * 0.5;
