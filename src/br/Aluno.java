@@ -7,7 +7,7 @@ public class Aluno extends Usuario{
   //CONSTRUTOR
   public Aluno(String nome, int id, String curso) {
     super(nome, id);
-    this.curso = curso;
+    this.curso = curso ;
   }
 
   //GETTERS SETTERS
