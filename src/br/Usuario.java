@@ -30,6 +30,6 @@ public abstract class Usuario {
 
   //METODOS PUBLICOS APLICAÇÂO DE ABSTRACAO, DEFINIÇÃO DO CONTRATO
   public abstract double calcularMulta(int diasAtraso);
-  public abstract int getDiasEmprestimo();
+  public abstract int getDiasEmprestimo() ;
 
 }
