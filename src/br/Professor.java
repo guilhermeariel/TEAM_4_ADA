@@ -16,7 +16,7 @@ public class Professor extends Usuario{
   }
 
   public void setDepartamento(String departamento) {
-    this.departamento = departamento;
+    this.departamento = departamento ;
   }
 
   @Override
