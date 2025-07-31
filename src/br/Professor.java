@@ -12,7 +12,6 @@ public class Professor extends Usuario {
     this.emAula = false;
   }
 
-  //GETTERS E SETTER
   public String getDepartamento() {
     return departamento;
   }
