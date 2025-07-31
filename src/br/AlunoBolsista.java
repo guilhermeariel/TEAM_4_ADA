@@ -1,10 +1,8 @@
 package br;
 
 public class AlunoBolsista extends Aluno {
-
-
-  public AlunoBolsista(String nome, int id, String curso) {
-    super(nome, id, curso);
+  public AlunoBolsista(String nome, int id, String email, String telefone, String curso, int periodo) {
+    super(nome, id, email, telefone, curso, periodo);
   }
 
   @Override
