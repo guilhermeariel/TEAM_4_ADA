@@ -1,14 +1,25 @@
 package br;
+import java.util.Arrays;
+import java.util.List;
 
 public class Professor extends Usuario {
+  private static final List<String> DEPARTAMENTOS_VALIDOS = Arrays.asList("Matemática", "Informática", "Letras", "Física", "História");
+
   private String departamento;
-  private String nivel; // Exemplo: "mestre", "doutor"
+  private String nivel; // ex: mestre, doutor
   private boolean emAula;
 
-  public Professor(String nome, int id, String email, String telefone, String departamento) {
-    super(nome, id, email, telefone);
+  // Alterado: remoção do parâmetro id (gerado automaticamente pela superclasse)
+  // Adicionado: validação do departamento com base em lista permitida
+  public Professor(String nome, String email, String telefone, String departamento) {
+    super(nome, email, telefone);
+
+    if (!DEPARTAMENTOS_VALIDOS.contains(departamento)) {
+      throw new IllegalArgumentException("Departamento inválido: " + departamento);
+    }
+
     this.departamento = departamento;
-    this.nivel = "mestre"; // valor padrão
+    this.nivel = "mestre";
     this.emAula = false;
   }
 
@@ -18,10 +29,6 @@ public class Professor extends Usuario {
 
   public String getNivel() {
     return nivel;
-  }
-
-  public void setNivel(String nivel) {
-    this.nivel = nivel;
   }
 
   public void iniciarAula() {
@@ -38,11 +45,12 @@ public class Professor extends Usuario {
 
   @Override
   public double calcularMulta(int diasAtraso) {
-    return diasAtraso * 0.5; // Professores pagam menos multa
+    return diasAtraso * 0.5;
   }
 
   @Override
   public int getDiasEmprestimo() {
-    return 14; // Prazo maior para professores
+    return 14;
   }
 }
+

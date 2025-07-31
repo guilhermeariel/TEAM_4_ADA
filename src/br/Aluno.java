@@ -10,6 +10,8 @@ public class Aluno extends Usuario {
   private int periodo;
   private boolean ativo;
 
+  // Alterado: remoção do parâmetro id (gerado automaticamente pela superclasse)
+  // Adicionado: validação do departamento com base em lista permitida
   public Aluno(String nome, String email, String telefone, String curso, int periodo) {
     super(nome, email, telefone);
 
