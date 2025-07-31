@@ -5,13 +5,11 @@ public class Aluno extends Usuario {
   private int periodo;
   private boolean ativo;
 
-Usuario
   public Aluno(String nome, int id, String email, String telefone, String curso, int periodo) {
     super(nome, id, email, telefone);
     this.curso = curso;
     this.periodo = periodo;
     this.ativo = true;
-
   }
 
   public String getCurso() {
@@ -38,6 +36,7 @@ Usuario
     return ativo && !isBloqueado();
   }
 
+  //POLIFORMISMO DE SOBRECARGA
   @Override
   public double calcularMulta(int diasAtraso) {
     return diasAtraso * 1.0;
