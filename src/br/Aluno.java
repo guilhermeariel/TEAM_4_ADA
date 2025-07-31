@@ -10,7 +10,6 @@ public class Aluno extends Usuario {
   private int periodo;
   private boolean ativo;
 
-
   public Aluno(String nome, String email, String telefone, String curso, int periodo) {
     super(nome, email, telefone);
 
