@@ -2,19 +2,20 @@ package br;
 
 public class AlunoBolsista extends Aluno {
 
-    public AlunoBolsista(String nome, int id, String email, String telefone, String curso, int periodo) {
-        super(nome, id, email, telefone, curso, periodo);
+    // Alterado: remoção do parâmetro id (herdado de Usuario)
+    public AlunoBolsista(String nome, String email, String telefone, String curso, int periodo) {
+        super(nome, email, telefone, curso, periodo);
     }
 
     @Override
     public double calcularMulta(int diasAtraso) {
-        // Bolsista paga 50% da multa normal
+        // Bolsista paga metade da multa padrão
         return diasAtraso * 0.5;
     }
 
     @Override
     public int getDiasEmprestimo() {
-        // Bolsista tem mais dias de empréstimo
+        // Bolsista tem mais tempo de empréstimo
         return 10;
     }
 }

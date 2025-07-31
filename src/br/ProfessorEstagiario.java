@@ -2,19 +2,20 @@ package br;
 
 public class ProfessorEstagiario extends Professor {
 
-  public ProfessorEstagiario(String nome, int id, String email, String telefone, String departamento) {
-    super(nome, id, email, telefone, departamento);
+  // Alterado: remoção do parâmetro id (herdado de Usuario)
+  public ProfessorEstagiario(String nome, String email, String telefone, String departamento) {
+    super(nome, email, telefone, departamento);
   }
 
   @Override
   public double calcularMulta(int diasAtraso) {
-    // Estagiário tem a mesma taxa de multa que professor
+    // Estagiário paga a mesma multa que o professor
     return diasAtraso * 0.5;
   }
 
   @Override
   public int getDiasEmprestimo() {
-    // Estagiário tem um prazo de empréstimo reduzido
+    // Estagiário tem menos dias de empréstimo
     return 7;
   }
 }
