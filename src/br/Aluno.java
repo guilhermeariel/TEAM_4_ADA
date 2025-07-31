@@ -1,12 +1,23 @@
 package br;
+import java.util.Arrays;
+import java.util.List;
 
 public class Aluno extends Usuario {
+  private static final List<String> CURSOS_VALIDOS = Arrays.asList("ADS", "Engenharia",
+      "Direito", "TI", "Pedagogia");
+
   private String curso;
   private int periodo;
   private boolean ativo;
 
-  public Aluno(String nome, int id, String email, String telefone, String curso, int periodo) {
-    super(nome, id, email, telefone);
+
+  public Aluno(String nome, String email, String telefone, String curso, int periodo) {
+    super(nome, email, telefone);
+
+    if (!CURSOS_VALIDOS.contains(curso)) {
+      throw new IllegalArgumentException("Curso inválido: " + curso);
+    }
+
     this.curso = curso;
     this.periodo = periodo;
     this.ativo = true;
@@ -36,7 +47,6 @@ public class Aluno extends Usuario {
     return ativo && !isBloqueado();
   }
 
-  //POLIFORMISMO DE SOBRECARGA
   @Override
   public double calcularMulta(int diasAtraso) {
     return diasAtraso * 1.0;
