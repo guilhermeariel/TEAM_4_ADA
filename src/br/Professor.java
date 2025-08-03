@@ -3,7 +3,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Professor extends Usuario {
-  private static final List<String> DEPARTAMENTOS_VALIDOS = Arrays.asList("Matemática", "Informática", "Letras", "Física", "História");
+  private static final List<String> DEPARTAMENTOS_VALIDOS = Arrays.asList("Matemática", "Informática",
+      "Letras", "Física", "História");
 
   private String departamento;
   private String nivel; // ex: mestre, doutor
@@ -51,6 +52,11 @@ public class Professor extends Usuario {
   @Override
   public int getDiasEmprestimo() {
     return 14;
+  }
+
+  @Override
+  public boolean podePegarEmprestimo() {
+    return false;
   }
 }
 
