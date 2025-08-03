@@ -9,7 +9,7 @@ public class ProfessorEstagiario extends Professor {
 
   @Override
   public double calcularMulta(int diasAtraso) {
-    // Estagiário paga a mesma multa que o professor
+    // Estagiário paga a mesma multa que o professorr
     return diasAtraso * 0.5;
   }
 
