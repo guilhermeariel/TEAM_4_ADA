@@ -118,7 +118,7 @@ public class Biblioteca {
     Optional<Livro> livroOpt = livros.stream().filter(l -> l.getTitulo().equalsIgnoreCase(titulo)).findFirst();
     if (livroOpt.isEmpty()) {
       System.out.println("Livro não encontrado.");
-      return;
+      return ;
     }
     Livro livro = livroOpt.get();
     if (!livro.emprestar()) {
