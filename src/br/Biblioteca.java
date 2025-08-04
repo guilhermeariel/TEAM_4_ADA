@@ -109,7 +109,7 @@ public class Biblioteca {
       return;
     }
     Usuario usuario = opt.get();
-    if (!usuario.podePegarEmprestimo()) {
+    if (!usuario.podePegarEmprestimo())  {
       System.out.println("Usuário não pode pegar empréstimo.");
       return;
     }
