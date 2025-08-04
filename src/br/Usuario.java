@@ -72,4 +72,5 @@ public abstract class Usuario {
   public abstract double calcularMulta(int diasAtraso);
 
   public abstract int getDiasEmprestimo();
+  public abstract boolean podePegarEmprestimo();
 }
