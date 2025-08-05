@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Professor extends Usuario {
   private static final List<String> DEPARTAMENTOS_VALIDOS = Arrays.asList("Matemática", "Informática",
-      "Letras", "Física", "História");
+      "Letras", "Física", "História", "Medicina");
 
   private String departamento;
   private String nivel; // ex: mestre, doutor

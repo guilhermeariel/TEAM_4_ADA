@@ -1,4 +1,3 @@
-// 📁 model/Biblioteca.java
 package br;
 
 import java.time.LocalDate;

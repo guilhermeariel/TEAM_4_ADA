@@ -3,8 +3,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Aluno extends Usuario {
-  private static final List<String> CURSOS_VALIDOS = Arrays.asList("ADS", "Engenharia",
-      "Direito", "TI", "Pedagogia");
+  private static final List<String> CURSOS_VALIDOS = Arrays.asList("Medicina", "Engenharia",
+      "Direito", "TI", "Pedagogia", "Matemática");
 
   private String curso;
   private int periodo;
