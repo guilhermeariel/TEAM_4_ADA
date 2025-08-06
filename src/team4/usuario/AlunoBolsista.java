@@ -1,4 +1,4 @@
-package br;
+package team4.usuario;
 
 public class AlunoBolsista extends Aluno {
 

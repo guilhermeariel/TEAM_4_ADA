@@ -1,4 +1,6 @@
-package br;
+package team4.biblioteca;
+
+import team4.usuario.*;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -142,8 +144,7 @@ public class Biblioteca {
     }
 
     LocalDate hoje = LocalDate.now();
-    LocalDate dataDevolucaoPrevista = hoje.plusDays(usuario.getDiasEmprestimo());
-    Emprestimo emprestimo = new Emprestimo(usuario, livro, hoje, dataDevolucaoPrevista, null, false);
+    Emprestimo emprestimo = new Emprestimo(usuario, livro, hoje, usuario.getDiasEmprestimo());
     emprestimos.add(emprestimo);
     System.out.println("Empréstimo registrado com sucesso.");
   }
