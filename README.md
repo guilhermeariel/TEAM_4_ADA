@@ -4,7 +4,7 @@
 Um sistema de biblioteca simples e completo desenvolvido em Java, com foco nos pilares da Programação Orientada a Objetos (POO): encapsulamento, abstração, herança e polimorfismo.
 
 Este projeto simula o gerenciamento de uma biblioteca, permitindo o cadastro de diferentes tipos de usuários, controle de livros, empréstimos, devoluções e aplicação de multas por atraso.
-🚀 Funcionalidades
+Funcionalidades
 
     ✅ Cadastro de usuários:
 
