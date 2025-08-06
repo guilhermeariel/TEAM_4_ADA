@@ -188,9 +188,31 @@ public class Biblioteca {
 
   // Listar todos os usuários
   public void listarUsuarios() {
-    usuarios.values().forEach(u ->
-        System.out.println("ID: " + u.getId() + ", Nome: " + u.getNome() + ", Email: " + u.getEmail()));
+    if (usuarios.isEmpty()) {
+      System.out.println("Nenhum usuário cadastrado.");
+      return;
+    }
+
+    for (Usuario u : usuarios.values()) {
+      System.out.println("ID: " + u.getId());
+      System.out.println("Nome: " + u.getNome());
+      System.out.println("Email: " + u.getEmail());
+
+      if (u instanceof Aluno aluno) {
+        System.out.println("Tipo: " + (aluno instanceof AlunoBolsista ? "Aluno Bolsista" : "Aluno"));
+        System.out.println("Curso: " + aluno.getCurso());
+        System.out.println("Período: " + aluno.getPeriodo());
+      } else if (u instanceof Professor professor) {
+        System.out.println("Tipo: " + (professor instanceof ProfessorEstagiario ? "Professor Estagiário" : "Professor"));
+        System.out.println("Departamento: " + professor.getDepartamento());
+      } else {
+        System.out.println("Tipo: Usuário desconhecido.");
+      }
+
+      System.out.println("--------------------------------");
+    }
   }
+
 
   // Listar todos os empréstimos ativos
   public void listarEmprestimosAtivos() {
