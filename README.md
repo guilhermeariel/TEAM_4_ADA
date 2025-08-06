@@ -38,7 +38,7 @@ Funcionalidades
 
         Empréstimos atrasados
 
-🧠 Conceitos de POO Aplicados
+Conceitos de POO Aplicados
 Pilar	Aplicação prática
 Encapsulamento	Atributos privados com acesso via getters/setters
 Herança	Aluno, Professor e suas especializações herdando de Usuario
