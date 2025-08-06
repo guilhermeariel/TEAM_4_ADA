@@ -9,7 +9,7 @@ public class Professor extends Usuario {
 
   private String departamento;
   private String nivel; // Ex: mestre, doutor
-  private boolean emAula;
+  private boolean emAula ;
 
   public Professor(String nome, String email, String telefone, String departamento) {
     super(nome, email, telefone);
