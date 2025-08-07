@@ -6,14 +6,13 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class Biblioteca {
-    private Map<Livro, Integer> acervo;
-    private Map<Integer, Usuario> usuarios;
-    private List<Emprestimo> emprestimos;
+    private Map<Livro, Integer> acervo = new HashMap<>();
+    private Map<Integer, Usuario> usuarios = new HashMap<>();
+    private List<Emprestimo> emprestimos = new ArrayList<>();
+
 
     // Cadastrar livro
-    public void adicionarAcervo(Scanner scanner) {
-        this.acervo = new HashMap<>();
-
+    public void cadastrarLivro(Scanner scanner) {
         System.out.print("Título: ");
         String titulo = scanner.nextLine();
 
@@ -30,22 +29,11 @@ public class Biblioteca {
 
         System.out.print("Quantidade total: ");
         int quantidade = scanner.nextInt();
-        if (adicionarLivro(livro, quantidade))
+        if (adicionarAcervo(livro, quantidade))
             System.out.println(quantidade + " exemplar(es) de '" + livro.getTitulo() + "' adicionado(s) com sucesso.");
     }
 
-    // Listar todos os livros disponíveis
-    public void listarAcervo() {
-        if (this.acervo.isEmpty()) {
-            System.out.println("A biblioteca está vazia.");
-        } else {
-            System.out.println("Acervo da Biblioteca:");
-            for (Map.Entry<Livro, Integer> entry : this.acervo.entrySet()) {
-                System.out.println("  " + entry.getKey().getTitulo() + " - Quantidade: " + entry.getValue());
-            }
-        }
-    }
-
+    // Pesquisar no acervo livro por titulo
     public Livro pesquisarLivroPorTitulo(String titulo) {
         for (Livro livro : this.acervo.keySet()) {
             if (livro.getTitulo().equalsIgnoreCase(titulo)) {
@@ -55,7 +43,8 @@ public class Biblioteca {
         return null; // Retorna null se nenhum livro for encontrado
     }
 
-    public boolean adicionarLivro(Livro livro, int quantidade) {
+    //Adicionar livro no acervo
+    public boolean adicionarAcervo(Livro livro, int quantidade) {
         if (quantidade > 0) {
             this.acervo.put(livro, this.acervo.getOrDefault(livro, 0) + quantidade);
             System.out.println(quantidade + " exemplar(es) de '" + livro.getTitulo() + "' adicionado(s) com sucesso.");
@@ -66,6 +55,7 @@ public class Biblioteca {
         }
     }
 
+    //Remover livro do acervo
     public boolean removerLivro(Livro livro, int quantidade) {
         if (this.acervo.containsKey(livro)) {
             int quantidadeAtual = this.acervo.getOrDefault(livro, 0)
@@ -88,10 +78,20 @@ public class Biblioteca {
         }
     }
 
+    // Listar todos os livros disponívrid no acervo
+    public void listarAcervo() {
+        if (this.acervo.isEmpty()) {
+            System.out.println("A biblioteca está vazia.");
+        } else {
+            System.out.println("Acervo da Biblioteca:");
+            for (Map.Entry<Livro, Integer> entry : this.acervo.entrySet()) {
+                System.out.println("  " + entry.getKey().getTitulo() + " - Quantidade: " + entry.getValue());
+            }
+        }
+    }
+
     // Cadastrar usuários de diferentes tipos
     public void cadastrarUsuario(Scanner scanner) {
-        this.usuarios = new HashMap<>();
-
         System.out.println("Informe o tipo de usuário (1- Aluno, 2- Aluno Bolsista, 3- Professor, 4- Professor Estagiário): ");
         int tipo = scanner.nextInt();
         scanner.nextLine();
@@ -138,12 +138,15 @@ public class Biblioteca {
                 }
             }
 
-            this.usuarios.put(usuario.getId(), usuario);
-            System.out.println("Usuário cadastrado com sucesso!");
+            adicionarUsuario(usuario.getId(), usuario);
 
         } catch (IllegalArgumentException e) {
             System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
         }
+    }
+
+    public void adicionarUsuario(int idUsuario, Usuario usuario) {
+        this.usuarios.put(idUsuario, usuario);
     }
 
     // Listar todos os usuários
@@ -207,8 +210,7 @@ public class Biblioteca {
 
     // Realizar empréstimo
     public void realizarEmprestimo(Scanner scanner) {
-        this.emprestimos = new ArrayList<>();
-
+        listarUsuarios();
         System.out.print("Informe o ID do usuário: ");
         int idUsuario = scanner.nextInt();
         scanner.nextLine();
@@ -235,8 +237,27 @@ public class Biblioteca {
         System.out.println("Empréstimo registrado com sucesso.");
     }
 
+    // Listar todos os empréstimos ativos
+    public void listarEmprestimosAtivos() {
+        this.emprestimos.stream()
+                .filter(e -> !e.isDevolvido())
+                .forEach(System.out::println);
+    }
+
+    // Listar empréstimos atrasados
+    public void listarEmprestimosAtrasados() {
+        this.emprestimos.stream()
+                .filter(Emprestimo::isAtrasado)
+                .forEach(e -> {
+                    System.out.println(e);
+                    System.out.println("Dias de atraso: " + e.diasDeAtraso());
+                    System.out.println("Multa: R$ " + e.getUsuario().calcularMulta(e.diasDeAtraso()));
+                });
+    }
+
     // Registrar devolução
     public void registrarDevolucao(Scanner scanner) {
+        listarUsuarios();
         System.out.print("Informe o ID do usuário: ");
         int id = scanner.nextInt();
         scanner.nextLine();
@@ -262,29 +283,11 @@ public class Biblioteca {
         }
 
         Emprestimo emprestimo = emprestimosUsuario.get(index);
-        if (adicionarLivro(emprestimo.getLivro(), 1)) {
+        if (adicionarAcervo(emprestimo.getLivro(), 1)) {
             emprestimo.registrarDevolucao(LocalDate.now());
             System.out.println("Devolução registrada com sucesso.");
         } else {
             System.out.println("Livro não pertence ao acervo.");
         }
-    }
-
-    // Listar todos os empréstimos ativos
-    public void listarEmprestimosAtivos() {
-        this.emprestimos.stream()
-                .filter(e -> !e.isDevolvido())
-                .forEach(System.out::println);
-    }
-
-    // Listar empréstimos atrasados
-    public void listarEmprestimosAtrasados() {
-        this.emprestimos.stream()
-                .filter(Emprestimo::isAtrasado)
-                .forEach(e -> {
-                    System.out.println(e);
-                    System.out.println("Dias de atraso: " + e.diasDeAtraso());
-                    System.out.println("Multa: R$ " + e.getUsuario().calcularMulta(e.diasDeAtraso()));
-                });
     }
 }
