@@ -1,6 +1,7 @@
 package team4.biblioteca;
 
 import team4.usuario.Usuario;
+
 import java.time.LocalDate;
 
 public class Emprestimo {
@@ -15,14 +16,6 @@ public class Emprestimo {
         this.livro = livro;
         this.dataEmprestimo = dataEmprestimo;
         this.quantidadeDeDias = quantidadeDeDias;
-    }
-
-    public Emprestimo(Usuario usuario, Livro livro, LocalDate dataEmprestimo, int quantidadeDeDias, LocalDate dataDevolucao) {
-        this.usuario = usuario;
-        this.livro = livro;
-        this.dataEmprestimo = dataEmprestimo;
-        this.quantidadeDeDias = quantidadeDeDias;
-        this.dataDevolucao = dataDevolucao;
     }
 
     public Usuario getUsuario() {
@@ -55,7 +48,6 @@ public class Emprestimo {
     public void registrarDevolucao(LocalDate dataDevolucao) {
         if (!isDevolvido()) {
             this.dataDevolucao = dataDevolucao;
-            this.livro.devolver();
             System.out.println("Livro devolvido com sucesso!.");
         } else {
             System.out.println("Livro já foi devolvido anteriormente.");
@@ -69,6 +61,6 @@ public class Emprestimo {
                 "livro = " + livro.getTitulo() + "\n" +
                 "dataEmprestimo = " + dataEmprestimo + "\n" +
                 "dataDevolucaoPrevista = " + this.dataEmprestimo.plusDays(this.quantidadeDeDias) + "\n" +
-                "dataDevolucao = " + (dataDevolucao != null ? dataDevolucao.toString() : " ")+ "}";
+                "dataDevolucao = " + (dataDevolucao != null ? dataDevolucao.toString() : " ") + "}";
     }
 }

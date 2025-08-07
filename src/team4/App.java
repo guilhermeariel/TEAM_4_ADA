@@ -30,10 +30,10 @@ public class App {
 
       switch (opcao) {
         case 1 -> biblioteca.cadastrarUsuario(scanner);
-        case 2 -> biblioteca.cadastrarLivro(scanner);
+        case 2 -> biblioteca.adicionarAcervo(scanner);
         case 3 -> biblioteca.realizarEmprestimo(scanner);
         case 4 -> biblioteca.registrarDevolucao(scanner);
-        case 5 -> biblioteca.listarLivrosDisponiveis();
+        case 5 -> biblioteca.listarAcervo();
         case 6 -> biblioteca.listarUsuarios();
         case 7 -> biblioteca.listarEmprestimosAtivos();
         case 8 -> biblioteca.listarEmprestimosAtrasados();
