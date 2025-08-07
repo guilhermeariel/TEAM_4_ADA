@@ -23,7 +23,7 @@ public class App {
       System.out.println("9. Editar usuário");
       System.out.println("10. Remover usuário");
       System.out.println("0. Sair");
-      System.out.print("Escolha uma opção: ");
+      System.out.print("Escolha uma opção: ") ;
 
       opcao = scanner.nextInt();
       scanner.nextLine();
