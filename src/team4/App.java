@@ -10,44 +10,57 @@ public class App {
     public static void main(String[] args) {
         Biblioteca biblioteca = new Biblioteca();
 
-        Usuario aluno1 = new Aluno("Aluno 1", "aluno1@aluno.com", "11 99999-9999", "Medicina", 1);
+        Usuario aluno1 = new Aluno("Aluno 1", "aluno1@aluno.com", "11 99999-9999",
+            "Medicina", 1);
         biblioteca.adicionarUsuario(aluno1.getId(), aluno1);
 
-        Usuario aluno2 = new Aluno("Aluno 2", "aluno2@aluno.com", "11 99999-9999", "Engenharia", 2);
+        Usuario aluno2 = new Aluno("Aluno 2", "aluno2@aluno.com", "11 99999-9999",
+            "Engenharia", 2);
         biblioteca.adicionarUsuario(aluno2.getId(), aluno2);
 
-        Usuario bolsista1 = new AlunoBolsista("Bolsista 1", "bolsista1@bolsista.com", "11 99999-9999", "Medicina", 3);
+        Usuario bolsista1 = new AlunoBolsista("Bolsista 1", "bolsista1@bolsista.com",
+            "11 99999-9999", "Medicina", 3);
         biblioteca.adicionarUsuario(bolsista1.getId(), bolsista1);
 
-        Usuario bolsista2 = new AlunoBolsista("Bolsista 2", "bolsista2@bolsista.com", "11 99999-9999", "Engenharia", 3);
+        Usuario bolsista2 = new AlunoBolsista("Bolsista 2", "bolsista2@bolsista.com",
+            "11 99999-9999", "Engenharia", 3);
         biblioteca.adicionarUsuario(bolsista2.getId(), bolsista2);
 
-        Usuario professor1 = new Professor("Professor 1", "professor1@professor.com", "11 99999-9999", "Medicina");
+        Usuario professor1 = new Professor("Professor 1", "professor1@professor.com",
+            "11 99999-9999", "Medicina");
         biblioteca.adicionarUsuario(professor1.getId(), professor1);
 
-        Usuario professor2 = new Professor("Professor 2", "professor2@professor.com", "11 99999-9999", "Informática");
+        Usuario professor2 = new Professor("Professor 2", "professor2@professor.com",
+            "11 99999-9999", "Informática");
         biblioteca.adicionarUsuario(professor2.getId(), professor2);
 
-        Usuario estagiario1 = new ProfessorEstagiario("Estagiario 1", "estagiario1@estagiario.com", "11 99999-9999", "Medicina");
+        Usuario estagiario1 = new ProfessorEstagiario("Estagiario 1", "estagiario1@estagiario.com",
+            "11 99999-9999", "Medicina");
         biblioteca.adicionarUsuario(estagiario1.getId(), estagiario1);
 
-        Usuario estagiario2 = new ProfessorEstagiario("Estagiario 2", "estagiario2@estagiario.com", "11 99999-9999", "Informática");
+        Usuario estagiario2 = new ProfessorEstagiario("Estagiario 2", "estagiario2@estagiario.com",
+            "11 99999-9999", "Informática");
         biblioteca.adicionarUsuario(estagiario2.getId(), estagiario2);
 
         // Criando objetos Livro
-        Livro livro1 = new Livro("O Senhor dos Anéis", "J.R.R. Tolkien", "Allen & Unwin", 1954);
+        Livro livro1 = new Livro("O Senhor dos Anéis", "J.R.R. Tolkien", "Allen & Unwin",
+            1954);
         biblioteca.adicionarAcervo(livro1, 3);
 
-        Livro livro2 = new Livro("Harry Potter e a Pedra Filosofal", "J.K. Rowling", "Bloomsbury", 1997);
+        Livro livro2 = new Livro("Harry Potter e a Pedra Filosofal", "J.K. Rowling",
+            "Bloomsbury", 1997);
         biblioteca.adicionarAcervo(livro2, 3);
 
-        Livro livro3 = new Livro("1984", "George Orwell", "Secker & Warburg", 1949);
+        Livro livro3 = new Livro("1984", "George Orwell", "Secker & Warburg",
+            1949);
         biblioteca.adicionarAcervo(livro3, 3);
 
-        Livro livro4 = new Livro("Duna", "Frank Herbert", "Chilton Books", 1965);
+        Livro livro4 = new Livro("Duna", "Frank Herbert", "Chilton Books",
+            1965);
         biblioteca.adicionarAcervo(livro4, 3);
 
-        Livro livro5 = new Livro("A Roda do Tempo", "Robert Jordan", "Tor Books", 1990);
+        Livro livro5 = new Livro("A Roda do Tempo", "Robert Jordan", "Tor Books",
+            1990);
         biblioteca.adicionarAcervo(livro5, 3);
 
         Scanner scanner = new Scanner(System.in);
@@ -57,6 +70,7 @@ public class App {
         do {
             System.out.println("\n===== SISTEMA BIBLIOTECA =====");
             System.out.println("1. Cadastrar usuário");
+            System.out.println("2. Cadastrar livro");
             System.out.println("3. Realizar empréstimo");
             System.out.println("4. Registrar devolução");
             System.out.println("5. Listar livros disponíveis");

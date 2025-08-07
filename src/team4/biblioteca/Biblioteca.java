@@ -1,7 +1,5 @@
 package team4.biblioteca;
-
 import team4.usuario.*;
-
 import java.time.LocalDate;
 import java.util.*;
 
@@ -30,7 +28,8 @@ public class Biblioteca {
         System.out.print("Quantidade total: ");
         int quantidade = scanner.nextInt();
         if (adicionarAcervo(livro, quantidade))
-            System.out.println(quantidade + " exemplar(es) de '" + livro.getTitulo() + "' adicionado(s) com sucesso.");
+            System.out.println(quantidade + " exemplar(es) de '" + livro.getTitulo() + "' "
+                + "adicionado(s) com sucesso.");
     }
 
     // Pesquisar no acervo livro por titulo
@@ -47,7 +46,8 @@ public class Biblioteca {
     public boolean adicionarAcervo(Livro livro, int quantidade) {
         if (quantidade > 0) {
             this.acervo.put(livro, this.acervo.getOrDefault(livro, 0) + quantidade);
-            System.out.println(quantidade + " exemplar(es) de '" + livro.getTitulo() + "' adicionado(s) com sucesso.");
+            System.out.println(quantidade + " exemplar(es) de '" + livro.getTitulo() + "' "
+                + "adicionado(s) com sucesso.");
             return true;
         } else {
             System.out.println("A quantidade deve ser maior que zero.");
@@ -62,14 +62,17 @@ public class Biblioteca {
                     ;
             if (quantidadeAtual > quantidade) {
                 this.acervo.put(livro, quantidadeAtual - quantidade);
-                System.out.println(quantidade + " exemplar(es) de '" + livro.getTitulo() + "' removido(s).");
+                System.out.println(quantidade + " exemplar(es) de '" + livro.getTitulo() + "' "
+                    + "removido(s).");
                 return true;
             } else if (quantidadeAtual == quantidade) {
                 this.acervo.remove(livro);
-                System.out.println("Todos os exemplares de '" + livro.getTitulo() + "' foram removidos.");
+                System.out.println("Todos os exemplares de '" + livro.getTitulo() + "' "
+                    + "foram removidos.");
                 return true;
             } else {
-                System.out.println("Não há exemplares suficientes de '" + livro.getTitulo() + "'. Apenas " + quantidadeAtual + " em estoque.");
+                System.out.println("Não há exemplares suficientes de '" + livro.getTitulo() + "'. "
+                    + "Apenas " + quantidadeAtual + " em estoque.");
                 return false;
             }
         } else {
@@ -85,14 +88,16 @@ public class Biblioteca {
         } else {
             System.out.println("Acervo da Biblioteca:");
             for (Map.Entry<Livro, Integer> entry : this.acervo.entrySet()) {
-                System.out.println("  " + entry.getKey().getTitulo() + " - Quantidade: " + entry.getValue());
+                System.out.println("  " + entry.getKey().getTitulo() + " - Quantidade: "
+                    + entry.getValue());
             }
         }
     }
 
     // Cadastrar usuários de diferentes tipos
     public void cadastrarUsuario(Scanner scanner) {
-        System.out.println("Informe o tipo de usuário (1- Aluno, 2- Aluno Bolsista, 3- Professor, 4- Professor Estagiário): ");
+        System.out.println("Informe o tipo de usuário (1- Aluno, 2- Aluno Bolsista, 3- Professor, "
+            + "4- Professor Estagiário): ");
         int tipo = scanner.nextInt();
         scanner.nextLine();
 
@@ -162,11 +167,13 @@ public class Biblioteca {
             System.out.println("Email: " + u.getEmail());
 
             if (u instanceof Aluno aluno) {
-                System.out.println("Tipo: " + (aluno instanceof AlunoBolsista ? "Aluno Bolsista" : "Aluno"));
+                System.out.println("Tipo: " + (aluno instanceof AlunoBolsista ? "Aluno Bolsista"
+                    : "Aluno"));
                 System.out.println("Curso: " + aluno.getCurso());
                 System.out.println("Período: " + aluno.getPeriodo());
             } else if (u instanceof Professor professor) {
-                System.out.println("Tipo: " + (professor instanceof ProfessorEstagiario ? "Professor Estagiário" : "Professor"));
+                System.out.println("Tipo: " + (professor instanceof ProfessorEstagiario ? "Professor "
+                    + "Estagiário" : "Professor"));
                 System.out.println("Departamento: " + professor.getDepartamento());
             } else {
                 System.out.println("Tipo: Usuário desconhecido.");
