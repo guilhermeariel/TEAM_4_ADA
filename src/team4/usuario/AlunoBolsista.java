@@ -1,21 +1,31 @@
 package team4.usuario;
 
+/**
+ * Aluno bolsista: paga metade da multa e tem prazo de empréstimo maior.
+ */
 public class AlunoBolsista extends Aluno {
 
-    // Alterado: remoção do parâmetro id (herdado de Usuario)
-    public AlunoBolsista(String nome, String email, String telefone, String curso, int periodo) {
+    private static final double FATOR_MULTA = 0.5; // 50% da multa padrão do aluno
+    private static final int PRAZO_DIAS = 10;      // prazo ampliado para bolsistas
+
+    // Ajustado: periodo como String ("Manhã", "Tarde", "Noite"), seguindo Aluno
+    public AlunoBolsista(String nome, String email, String telefone, String curso, String periodo) {
         super(nome, email, telefone, curso, periodo);
     }
 
+    /**
+     * Bolsista paga 50% da multa aplicada a um aluno comum.
+     */
     @Override
     public double calcularMulta(int diasAtraso) {
-        // Bolsista paga metade da multa padrão
-        return diasAtraso * 0.5;
+        return diasAtraso * FATOR_MULTA;
     }
 
+    /**
+     * Prazo ampliado para bolsistas.
+     */
     @Override
     public int getDiasEmprestimo() {
-        // Bolsista tem mais tempo de empréstimo
-        return 10;
+        return PRAZO_DIAS;
     }
 }
