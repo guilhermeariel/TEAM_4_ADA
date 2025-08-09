@@ -5,10 +5,17 @@ import java.util.List;
 
 public class Professor extends Usuario {
     private static final List<String> DEPARTAMENTOS_VALIDOS = Arrays.asList(
-            "Matemática", "Informática", "Letras", "Física", "História", "Medicina");
+        "Matemática", "Informática", "Letras", "Física", "História", "Medicina"
+    );
+    private static final List<String> NIVEIS_VALIDOS = Arrays.asList(
+        "mestre", "doutor"
+    );
 
-    private String departamento;
-    private String nivel; // Ex: mestre, doutor
+    private static final double FATOR_MULTA = 0.5; // professor paga metade da multa padrão
+    private static final int PRAZO_DIAS = 14;       // prazo ampliado para professor
+
+    private final String departamento;
+    private String nivel; // "mestre" ou "doutor"
     private boolean emAula;
 
     public Professor(String nome, String email, String telefone, String departamento) {
@@ -31,12 +38,32 @@ public class Professor extends Usuario {
         return nivel;
     }
 
-    public void iniciarAula() {
-        emAula = true;
+    /**
+     * Atualiza o nível acadêmico, validando contra a lista permitida.
+     */
+    public void atualizarNivel(String novoNivel) {
+        if (!NIVEIS_VALIDOS.contains(novoNivel)) {
+            throw new IllegalArgumentException("Nível inválido: " + novoNivel);
+        }
+        this.nivel = novoNivel;
     }
 
-    public void encerrarAula() {
+    /**
+     * Inicia uma aula; retorna true se mudou o estado.
+     */
+    public boolean iniciarAula() {
+        if (emAula) return false;
+        emAula = true;
+        return true;
+    }
+
+    /**
+     * Encerra uma aula; retorna true se mudou o estado.
+     */
+    public boolean encerrarAula() {
+        if (!emAula) return false;
         emAula = false;
+        return true;
     }
 
     public boolean estaDisponivelParaRetirada() {
@@ -45,16 +72,27 @@ public class Professor extends Usuario {
 
     @Override
     public boolean podePegarEmprestimo() {
-        return estaDisponivelParaRetirada(); // Corrigido aqui
+        return estaDisponivelParaRetirada();
     }
 
     @Override
     public double calcularMulta(int diasAtraso) {
-        return diasAtraso * 0.5;
+        return diasAtraso * FATOR_MULTA;
     }
 
     @Override
     public int getDiasEmprestimo() {
-        return 14;
+        return PRAZO_DIAS;
+    }
+
+    @Override
+    public String toString() {
+        return "Professor{" +
+            "id=" + getId() +
+            ", nome='" + getNome() + '\'' +
+            ", depto='" + departamento + '\'' +
+            ", nivel='" + nivel + '\'' +
+            ", emAula=" + emAula +
+            '}';
     }
 }
