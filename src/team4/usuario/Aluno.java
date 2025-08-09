@@ -4,20 +4,25 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Aluno extends Usuario {
-  private static final List<String> CURSOS_VALIDOS = Arrays.asList("Medicina", "Engenharia",
-      "Direito", "TI", "Pedagogia", "Matemática");
+  private static final List<String> CURSOS_VALIDOS = Arrays.asList(
+      "Medicina", "Engenharia", "Direito", "TI", "Pedagogia", "Matemática"
+  );
+  private static final List<String> PERIODOS_VALIDOS = Arrays.asList(
+      "Manhã", "Tarde", "Noite"
+  );
 
-  private String curso;
-  private int periodo;
+  private final String curso;
+  private String periodo;
   private boolean ativo;
 
-  // Alterado: remoção do parâmetro id (gerado automaticamente pela superclasse)
-  // Adicionado: validação do departamento com base em lista permitida
-  public Aluno(String nome, String email, String telefone, String curso, int periodo) {
+  public Aluno(String nome, String email, String telefone, String curso, String periodo) {
     super(nome, email, telefone);
 
     if (!CURSOS_VALIDOS.contains(curso)) {
       throw new IllegalArgumentException("Curso inválido: " + curso);
+    }
+    if (!PERIODOS_VALIDOS.contains(periodo)) {
+      throw new IllegalArgumentException("Período inválido: " + periodo);
     }
 
     this.curso = curso;
@@ -29,7 +34,7 @@ public class Aluno extends Usuario {
     return curso;
   }
 
-  public int getPeriodo() {
+  public String getPeriodo() {
     return periodo;
   }
 
@@ -41,24 +46,29 @@ public class Aluno extends Usuario {
     this.ativo = false;
   }
 
-  public void atualizarPeriodo() {
-    this.periodo++;
+  public void reativarMatricula() {
+    this.ativo = true;
   }
 
+  public void atualizarPeriodo(String novoPeriodo) {
+    if (!PERIODOS_VALIDOS.contains(novoPeriodo)) {
+      throw new IllegalArgumentException("Período inválido: " + novoPeriodo);
+    }
+    this.periodo = novoPeriodo;
+  }
+
+  @Override
   public boolean podePegarEmprestimo() {
     return ativo && !isBloqueado();
   }
 
   @Override
   public double calcularMulta(int diasAtraso) {
-    return diasAtraso * 1.0;
+    return diasAtraso * 1.0; // R$ 1 por dia de atraso
   }
 
   @Override
   public int getDiasEmprestimo() {
-    return 7;
+    return 7; // Prazo padrão para alunos
   }
-
-
 }
-
