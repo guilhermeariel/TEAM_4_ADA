@@ -9,6 +9,7 @@ public abstract class Usuario {
   private String telefone;
   private boolean bloqueado;
 
+  //Garante que o objeto só seja criado com dados válidos. Throw new....
   public Usuario(String nome, String email, String telefone) {
     if (nome == null || nome.trim().isEmpty()) {
       throw new IllegalArgumentException("Nome não pode ser vazio.");
@@ -27,6 +28,7 @@ public abstract class Usuario {
     if (telefone == null || telefone.trim().isEmpty()) {
       return false;
     }
+    //Valida um formato de telefone valido
     String regex = "^\\(?\\d{2}\\)?\\s?9?\\d{4}-?\\d{4}$";
     return Pattern.matches(regex, telefone.trim());
   }
@@ -34,23 +36,18 @@ public abstract class Usuario {
   public String getNome() {
     return nome;
   }
-
   public int getId() {
     return id;
   }
-
   public String getEmail() {
     return email;
   }
-
   public String getTelefone() {
     return telefone;
   }
-
   public boolean isBloqueado() {
     return bloqueado;
   }
-
   public void bloquear(String motivo) {
     this.bloqueado = true;
     System.out.println("Usuário bloqueado: " + motivo);
@@ -70,7 +67,6 @@ public abstract class Usuario {
   }
 
   public abstract double calcularMulta(int diasAtraso);
-
   public abstract int getDiasEmprestimo();
   public abstract boolean podePegarEmprestimo();
 }

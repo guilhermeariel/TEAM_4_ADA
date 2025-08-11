@@ -1,7 +1,5 @@
 package team4.biblioteca;
-
 import team4.usuario.Usuario;
-
 import java.time.LocalDate;
 
 public class Emprestimo {
@@ -39,9 +37,7 @@ public class Emprestimo {
 
     public int diasDeAtraso() {
         if (!isAtrasado()) return 0;
-
         LocalDate dataReferencia = isDevolvido() ? this.dataDevolucao : LocalDate.now();
-
         return (int) java.time.temporal.ChronoUnit.DAYS.between(this.dataEmprestimo.plusDays(this.quantidadeDeDias), dataReferencia);
     }
 
