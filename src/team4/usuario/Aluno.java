@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Aluno extends Usuario {
   private static final List<String> CURSOS_VALIDOS = Arrays.asList(
-      "Medicina", "Engenharia", "Direito", "TI", "Pedagogia", "Matemática"
+      "Medicina", "Engenharia", "Direito", "TI", "Pedagogia", "Matemática", "História", "Informática"
   );
   private static final List<String> PERIODOS_VALIDOS = Arrays.asList(
       "Manhã", "Tarde", "Noite"
