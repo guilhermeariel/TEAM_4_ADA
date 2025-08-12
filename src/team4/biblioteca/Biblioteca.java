@@ -1,13 +1,12 @@
 package team4.biblioteca;
 import team4.usuario.*;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.*; //Coleções
 
 public class Biblioteca {
     private Map<Livro, Integer> acervo = new HashMap<>();
-    private Map<Integer, Usuario> usuarios = new HashMap<>();
-    private List<Emprestimo> emprestimos = new ArrayList<>();
-
+    private Map<Integer, Usuario> usuarios = new HashMap<>(); //Chave valor
+    private List<Emprestimo> emprestimos = new ArrayList<>(); //Iracao simples para filtrar
 
     // Cadastrar livro
     public void cadastrarLivro(Scanner scanner) {
@@ -36,10 +35,10 @@ public class Biblioteca {
     public Livro pesquisarLivroPorTitulo(String titulo) {
         for (Livro livro : this.acervo.keySet()) {
             if (livro.getTitulo().equalsIgnoreCase(titulo)) {
-                return livro; // Retorna o objeto Livro assim que o encontra
+                return livro;
             }
         }
-        return null; // Retorna null se nenhum livro for encontrado
+        return null;
     }
 
     //Adicionar livro no acervo
@@ -97,11 +96,11 @@ public class Biblioteca {
     // Cadastrar usuários de diferentes tipos
     public void cadastrarUsuario(Scanner scanner) {
         System.out.println("Informe o tipo de usuário (1- Aluno, 2- Aluno Bolsista, 3- Professor, "
-            + "4- Professor Estagiário): ");
-        int tipo = scanner.nextInt();
-        scanner.nextLine();
+            + "4- Professor Estagiário): ");           // menu de tipos
+        int tipo = scanner.nextInt();                  // lê opção
+        scanner.nextLine();                            // consome quebra de linha
 
-        System.out.print("Nome: ");
+        System.out.print("Nome: ");                    // coleta dados comuns
         String nome = scanner.nextLine();
 
         System.out.print("Email: ");
@@ -111,44 +110,45 @@ public class Biblioteca {
         String telefone = scanner.nextLine();
 
         try {
-            Usuario usuario = null;
-            switch (tipo) {
-                case 1 -> {
+            Usuario usuario = null;                    // prepara variável para instância
+            switch (tipo) {                            // decide pelo tipo
+                case 1 -> {                            // Aluno
                     System.out.print("Curso: ");
                     String curso = scanner.nextLine();
                     System.out.print("Período: ");
                     int periodo = scanner.nextInt();
-                    usuario = new Aluno(nome, email, telefone, curso, periodo);
+                    usuario = new Aluno(nome, email, telefone, curso, periodo); // cria aluno
                 }
-                case 2 -> {
+                case 2 -> {                            // Aluno Bolsista
                     System.out.print("Curso: ");
                     String curso = scanner.nextLine();
                     System.out.print("Período: ");
                     int periodo = scanner.nextInt();
-                    usuario = new AlunoBolsista(nome, email, telefone, curso, periodo);
+                    usuario = new AlunoBolsista(nome, email, telefone, curso, periodo); // cria bolsista
                 }
-                case 3 -> {
+                case 3 -> {                            // Professor
                     System.out.print("Departamento: ");
                     String departamento = scanner.nextLine();
-                    usuario = new Professor(nome, email, telefone, departamento);
+                    usuario = new Professor(nome, email, telefone, departamento); // cria professor
                 }
-                case 4 -> {
+                case 4 -> {                            // Professor Estagiário
                     System.out.print("Departamento: ");
                     String departamento = scanner.nextLine();
-                    usuario = new ProfessorEstagiario(nome, email, telefone, departamento);
+                    usuario = new ProfessorEstagiario(nome, email, telefone, departamento); // cria estagiário
                 }
-                default -> {
-                    System.out.println("Tipo inválido!");
-                    return;
+                default -> {                           // opção fora do menu
+                    System.out.println("Tipo inválido!"); // feedback
+                    return;                            // encerra o metodo
                 }
             }
 
-            adicionarUsuario(usuario.getId(), usuario);
+            adicionarUsuario(usuario.getId(), usuario); // insere no mapa id -> usuário
 
-        } catch (IllegalArgumentException e) {
-            System.out.println("Erro ao cadastrar usuário: " + e.getMessage());
+        } catch (IllegalArgumentException e) {          // captura validações das classes de usuário
+            System.out.println("Erro ao cadastrar usuário: " + e.getMessage()); // feedback de erro
         }
     }
+
 
     public void adicionarUsuario(int idUsuario, Usuario usuario) {
         this.usuarios.put(idUsuario, usuario);
@@ -264,37 +264,38 @@ public class Biblioteca {
 
     // Registrar devolução
     public void registrarDevolucao(Scanner scanner) {
-        listarUsuarios();
-        System.out.print("Informe o ID do usuário: ");
-        int id = scanner.nextInt();
-        scanner.nextLine();
+        listarUsuarios();                                      // mostra usuários
+        System.out.print("Informe o ID do usuário: ");         // pede ID
+        int id = scanner.nextInt();                            // lê
+        scanner.nextLine();                                    // consome quebra de linha
 
-        List<Emprestimo> emprestimosUsuario = this.emprestimos.stream()
-                .filter(e -> e.getUsuario().getId() == id && !e.isDevolvido())
-                .toList();
+        List<Emprestimo> emprestimosUsuario = this.emprestimos.stream()  // filtra empréstimos
+            .filter(e -> e.getUsuario().getId() == id && !e.isDevolvido()) //   do usuário e ativos
+            .toList();                                                  // cria lista imutável com o resultado
 
-        if (emprestimosUsuario.isEmpty()) {
+        if (emprestimosUsuario.isEmpty()) {                    // nenhum ativo?
             System.out.println("Nenhum empréstimo ativo encontrado.");
-            return;
+            return;                                            // encerra
         }
 
-        for (int i = 0; i < emprestimosUsuario.size(); i++) {
+        for (int i = 0; i < emprestimosUsuario.size(); i++) {  // lista opções numeradas
             System.out.println(i + ". " + emprestimosUsuario.get(i));
         }
 
-        System.out.print("Escolha o número do empréstimo a devolver: ");
-        int index = scanner.nextInt();
-        if (index < 0 || index >= emprestimosUsuario.size()) {
+        System.out.print("Escolha o número do empréstimo a devolver: "); // pede índice
+        int index = scanner.nextInt();                                   // lê índice
+        if (index < 0 || index >= emprestimosUsuario.size()) {           // valida faixa
             System.out.println("Opção inválida.");
-            return;
+            return;                                                      // encerra se inválido
         }
 
-        Emprestimo emprestimo = emprestimosUsuario.get(index);
-        if (adicionarAcervo(emprestimo.getLivro(), 1)) {
-            emprestimo.registrarDevolucao(LocalDate.now());
-            System.out.println("Devolução registrada com sucesso.");
+        Emprestimo emprestimo = emprestimosUsuario.get(index);           // seleciona o empréstimo
+        if (adicionarAcervo(emprestimo.getLivro(), 1)) {                 // devolve 1 exemplar ao acervo
+            emprestimo.registrarDevolucao(LocalDate.now());              // registra data de devolução
+            System.out.println("Devolução registrada com sucesso.");     // feedback
         } else {
-            System.out.println("Livro não pertence ao acervo.");
+            System.out.println("Livro não pertence ao acervo.");         // fallback
         }
     }
+
 }

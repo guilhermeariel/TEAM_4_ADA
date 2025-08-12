@@ -1,5 +1,4 @@
 package team4.usuario;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,11 +12,10 @@ public class Professor extends Usuario {
 
     public Professor(String nome, String email, String telefone, String departamento) {
         super(nome, email, telefone);
-
+        //Validacao para o professor comecar um departamento reconhecido
         if (!DEPARTAMENTOS_VALIDOS.contains(departamento)) {
             throw new IllegalArgumentException("Departamento inválido: " + departamento);
         }
-
         this.departamento = departamento;
         this.nivel = "mestre";
         this.emAula = false;
@@ -49,8 +47,9 @@ public class Professor extends Usuario {
     }
 
     @Override
+    //Isento
     public double calcularMulta(int diasAtraso) {
-        return diasAtraso * 0.5;
+        return diasAtraso * 0.0;
     }
 
     @Override
